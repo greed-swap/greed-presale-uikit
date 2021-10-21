@@ -7,54 +7,39 @@ import { HamburgerIcon, HamburgerCloseIcon, LogoIcon as LogoWithText } from "./i
 import MenuButton from "./MenuButton";
 
 interface Props {
-  isPushed: boolean;
   isDark: boolean;
-  togglePush: () => void;
   href: string;
 }
 
 const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
-  .mobile-icon {
-    width: 52px;
-    ${({ theme }) => theme.mediaQueries.nav} {
-      display: none;
-    }
-  }
+  
   .desktop-icon {
-    width: 180px;
-    display: none;
-    ${({ theme }) => theme.mediaQueries.nav} {
-      display: block;
+    width: 310px;
+    display: block;
+    ${({ theme }) => theme.mediaQueries.sm} {
+      width: 420px;
     }
   }
 `;
 
-const Logo: React.FC<Props> = ({ isPushed, togglePush, isDark, href }) => {
+const Logo: React.FC<Props> = ({ isDark, href }) => {
   const isAbsoluteUrl = href.startsWith("http");
   const innerLogo = (
     <>
-      <LogoIcon className="mobile-icon" />
       <LogoWithText className="desktop-icon" isDark={isDark} />
     </>
   );
 
   return (
-    <Flex alignItems="center">
-      <MenuButton aria-label="Toggle menu" onClick={togglePush} mr="24px">
-        {isPushed ? (
-          <HamburgerCloseIcon width="24px" color="text" />
-        ) : (
-          <HamburgerIcon width="24px" color="text" />
-        )}
-      </MenuButton>
+    <Flex alignItems="center" mb="15px">
       {isAbsoluteUrl ? (
-        <StyledLink as="a" href={href} aria-label="Pancake home page">
+        <StyledLink as="a" href={href} aria-label="Greed home page">
           {innerLogo}
         </StyledLink>
       ) : (
-        <StyledLink to={href} aria-label="Pancake home page">
+        <StyledLink to={href} aria-label="Greed home page">
           {innerLogo}
         </StyledLink>
       )}

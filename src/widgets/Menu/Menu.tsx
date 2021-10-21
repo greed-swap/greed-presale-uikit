@@ -37,16 +37,13 @@ const StyledNav = styled.nav<{ showMenu: boolean }>`
 const BodyWrapper = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
 `;
 
-const Inner = styled.div<{ isPushed: boolean; showMenu: boolean }>`
+const Inner = styled.div`
   flex-grow: 1;
-  margin-top: ${({ showMenu }) => (showMenu ? `${MENU_HEIGHT}px` : 0)};
   transition: margin-top 0.2s;
   transform: translate3d(0, 0, 0);
-  ${({ theme }) => theme.mediaQueries.nav} {
-    margin-left: ${({ isPushed }) => `${isPushed ? SIDEBAR_WIDTH_FULL : SIDEBAR_WIDTH_REDUCED}px`};
-  }
 `;
 
 const MobileOnlyOverlay = styled(Overlay)`
@@ -115,39 +112,18 @@ const Menu: React.FC<NavProps> = ({
 
   return (
     <Wrapper>
-      <StyledNav showMenu={showMenu}>
-        <Logo
-          isPushed={isPushed}
-          togglePush={() => setIsPushed((prevState: boolean) => !prevState)}
-          isDark={isDark}
-          href={homeLink?.href ?? "/"}
-        />
-        <Flex>
-          <UserBlock account={account} login={login} logout={logout} />
-          {profile && <Avatar profile={profile} />}
-        </Flex>
-      </StyledNav>
       <BodyWrapper>
-        <Panel
-          isPushed={isPushed}
-          isMobile={isMobile}
-          showMenu={showMenu}
-          isDark={isDark}
-          toggleTheme={toggleTheme}
-          langs={langs}
-          setLang={setLang}
-          currentLang={currentLang}
-          cakePriceUsd={cakePriceUsd}
-          pushNav={setIsPushed}
-          links={links}
-          priceLink={priceLink}
-          rugDocLink={rugDocLink}
-          jagoSaferLink={jagoSaferLink}
-        />
-        <Inner isPushed={isPushed} showMenu={showMenu}>
+        <Flex flexDirection="column" alignItems="center" pt="20px" pb="10px">
+          <Logo
+            isDark={isDark}
+            href="https://www.greedtoken.com/"
+          />
+          <UserBlock account={account} login={login} logout={logout} />
+        </Flex>
+        <Inner>
           {children}
         </Inner>
-        <MobileOnlyOverlay show={isPushed} onClick={() => setIsPushed(false)} role="presentation" />
+        {/* <MobileOnlyOverlay show={isPushed} onClick={() => setIsPushed(false)} role="presentation" /> */}
       </BodyWrapper>
     </Wrapper>
   );

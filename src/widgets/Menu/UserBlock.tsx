@@ -22,7 +22,7 @@ const UserBlock: React.FC<Props> = ({ account, login, logout }) => {
             onPresentAccountModal();
           }}
         >
-          {accountEllipsis}
+          {account}
         </Button>
       ) : (
         <Button
