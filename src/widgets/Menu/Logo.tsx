@@ -16,10 +16,10 @@ const StyledLink = styled(Link)`
   align-items: center;
   
   .desktop-icon {
-    width: 310px;
+    width: 410px;
     display: block;
     ${({ theme }) => theme.mediaQueries.sm} {
-      width: 420px;
+      width: 640px;
     }
   }
 `;
